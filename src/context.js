@@ -567,8 +567,11 @@ class Context {
             for(var j=0; j<dh; j++) {
                 var ty = j/dh;
                 var ssy = sy+Math.floor(ty * sh);
-                var rgba = bitmap.getPixelRGBA(ssx,ssy);
-                this.bitmap.setPixelRGBA(dx+i, dy+j, rgba);
+                // Don't overwrite color pixel with transparent pixel
+                var new_pixel = bitmap.getPixelRGBA(ssx,ssy);
+                var old_pixel = this.bitmap.getPixelRGBA(dx+i, dy+j)
+                var final_pixel = this.composite(dx + i, dy + j, old_pixel, new_pixel);
+                this.bitmap.setPixelRGBA(dx+i, dy+j, final_pixel);
             }
         }
     }

@@ -570,7 +570,7 @@ class Context {
                 // Don't overwrite color pixel with transparent pixel
                 var new_pixel = bitmap.getPixelRGBA(ssx,ssy);
                 var old_pixel = this.bitmap.getPixelRGBA(dx+i, dy+j)
-                var final_pixel = this.composite(dx + i, dy + j, old_pixel, new_pixel);
+                var final_pixel = new_pixel === NAMED_COLORS.transparent ? old_pixel : new_pixel;
                 this.bitmap.setPixelRGBA(dx+i, dy+j, final_pixel);
             }
         }
